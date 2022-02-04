@@ -1,0 +1,47 @@
+/* body {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        color: #333;
+      } */
+
+      .note {
+        flex: 0 0 200px;
+        width: 200px;
+        height: 200px;
+
+        border: 1px solid #CCC;
+        margin: 12px;
+        border-radius: 10px;
+      }
+
+      .modal-container {
+        display: none;
+
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+
+        background-color: rgba(33, 33, 33, 0.5);
+      }
+
+      .modal-container--open {
+        display: block;
+      }
+
+      .modal {
+        position: absolute;
+        top: 150px;
+        left: 50%;
+        margin-left: -300px;
+        width: 600px;
+        height: 150px;
+        
+        transform-origin: top left;
+        will-change: transform; /* makes the animation run smoother */
+
+        background-color: #EEE;
+        border-radius: 10px;
+      }

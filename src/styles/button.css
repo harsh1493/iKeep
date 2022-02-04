@@ -1,0 +1,83 @@
+.round-button {
+    display:block;
+    width:30px;
+    height:30px;
+    line-height:-15px;
+    border-radius: 50%;
+    color:#0e0303;
+    text-align:center;
+    text-decoration:none;
+    background: white;
+    box-shadow: 0 0 3px white;
+    font-size:13px;
+    font-weight:bold;
+    margin: 10px;
+
+   
+}
+.round-button:hover {
+    background: #797a7c46;
+
+}
+
+i{
+    position: relative;
+    top: 5px;
+    right:3px;
+    cursor: pointer;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+
+  /* for visiblity on hover */
+  .showme {
+    display: none;
+    margin-top: 20px;
+  }
+  
+  .showhim:hover .showme {
+    display: block;
+  }
+
+  .card{
+    padding-bottom: 48px;
+  }
+  .showhim:hover .card{
+    
+    padding-bottom: 0px;
+  }
+
+
+  /* for text input */
+  p3 {
+    color: rgb(95, 87, 87);
+    font-weight: 500;
+  }
+
+  .shadow{
+    cursor:text;
+    
+  }

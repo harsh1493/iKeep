@@ -1,25 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
-
+import {
+  BrowserRouter,
+  Route,
+  Routes
+} from "react-router-dom";
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import About from './components/About';
+import Auth from './components/Auth';
+import NoteState from './context/Notes/NoteState';
+import Alert from './components/Alert';
+import AlertState from './context/Alert/AlertState';
+import AuthState from './context/Auth/AuthState';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <AuthState>
+      <AlertState>
+        <NoteState>
+
+          <BrowserRouter>
+            <Navbar />
+            <Alert />
+            <div className="container">
+
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/login" element={<Auth mode='login' />} />
+                <Route path="/signup" element={<Auth mode='signup' />} />
+              </Routes>
+            </div>
+          </BrowserRouter>
+        </NoteState>
+       </AlertState>
+      </AuthState>
+      );
 }
 
-export default App;
+      export default App;
