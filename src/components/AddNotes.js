@@ -13,6 +13,8 @@ import { IconButton } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import '../styles/button.css';
 import { Button } from '@mui/material';
+
+import ColorPalette from './ColorPalette';
 const AddNotes = () => {
 
 
@@ -23,9 +25,38 @@ const AddNotes = () => {
 
     // const [title,setTitle] = useState();
     // const [description,setDescription] = useState();
-    const [note, setNote] = useState({title:"",description:"",tag:""});
+    const [note, setNote] = useState({title:"",description:"",tag:"",background:"Default"});
     const [noteStates,setNoteStates]=useState([]);
     const [currentState,setCurrentState]=useState(0);
+
+    //palette visible
+    const [paletteActive, setpaletteActive] = useState(false);
+    const pallet={
+        "red":"bg-red-400",
+        "blue":"bg-blue-400",
+        "green":"bg-green-400",
+        "orange":"bg-orange-400",
+        "violet":"bg-violet-400",
+        "yellow":"bg-yellow-400",
+    }
+    const showPalette = () => {
+        setpaletteActive(!paletteActive);
+    };
+    const setBackground = (color,note) => {
+     
+        setNote({
+            title:note.title,
+            description:note.description,
+            tag:note.tag,
+            background:color
+            });
+            console.log(color,note);
+   
+      // addNote(note.title,note.description,note.tag,color);
+    };
+    
+
+
 
     const handleClick = (event) => {
         //prevents reload of page on submit
@@ -33,11 +64,12 @@ const AddNotes = () => {
         if(note.title.length>5 && note.description.length>5){
         showAlert("Note added", "success");
         console.log(note);
-        addNote(note.title,note.description,note.tag);
+        addNote(note.title,note.description,note.tag,note.background);
  
         }
         setNote({});
         setShow(true);
+        setpaletteActive(false);
     }
     const onChange=(event)=>{
         //spread the existing note and add/overwrite the respective target.name to respective target.value
@@ -79,7 +111,7 @@ const AddNotes = () => {
         }, [ref,note]);
     }
 
-    //to undo input text to previous state
+    //to undo and redo input text to previous state
     const undo=()=>{
         console.log(noteStates);
         setNote(noteStates.at(currentState-1));
@@ -94,6 +126,8 @@ const AddNotes = () => {
         console.log(noteStates.at(currentState),currentState);
     }
 
+    
+
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
 
@@ -104,14 +138,14 @@ const AddNotes = () => {
             <div className='d-flex justify-content-center' style={{ width: "80%" }}>
                 {show ? <div className="shadow p-3 mb-5 bg-white rounded w-50 my-3 " onClick={handleFlick} >
                     <p>Take a note...</p>
-                </div> : <div className="container my-3 shadow p-3 mb-5 bg-white rounded w-50" ref={wrapperRef}>
+                </div> : <div className={`relative container my-3 shadow p-3 mb-5  rounded w-50 ${note.background==="Default"?pallet["white"]:pallet[note.background]}`} ref={wrapperRef}>
                     <form action=" ">
 
-                        <div className="mb-3">
-                            <input type="text" id="title" value={note.title} minLength={5} required name='title'  placeholder="Title" onChange={onChange} style={{ border: "none", outlineWidth: "0", width: "100%", fontWeight: "500" }} />
+                        <div className="mb-3 bg-transparent">
+                            <input className='bg-transparent text-black w-max border-0 outline-0 font-semibold' type="text" id="title" value={note.title} minLength={5} required name='title'  placeholder="Title" onChange={onChange}  />
                         </div>
                         <div className="mb-3">
-                            <input id="description" name='description' value={note.description} minLength={5} required onChange={onChange} placeholder='Take a note..' style={{ border: "none", outlineWidth: "0", width: "100%" }}></input>
+                            <input className='bg-transparent text-black w-max border-0 outline-0 font-normal' id="description" name='description' value={note.description} minLength={5} required onChange={onChange} placeholder='Take a note..' style={{ border: "none", outlineWidth: "0", width: "100%" }}></input>
                         </div>
                         <div className="row">
                             <div className='row'>
@@ -125,11 +159,12 @@ const AddNotes = () => {
 
                                 <div className='col-md-1 mx-1'>
                                     <Tooltip title="Background Options">
-                                        <IconButton disableTouchRipple="true" size="small">
+                                        <IconButton disableTouchRipple="true" size="small" onClick={showPalette} >
                                             <ColorLensOutlinedIcon fontSize='inherit' />
                                         </IconButton>
                                     </Tooltip>
                                 </div>
+                                {paletteActive?<ColorPalette  note={note}  setBackground={setBackground}/>:""}
                                 <div className='col-md-1 mx-1'>
                                     <Tooltip title="Add Image">
                                         <IconButton disableTouchRipple="true" size="small">

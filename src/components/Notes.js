@@ -16,6 +16,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { Button } from '@mui/material';
 import "../styles/alternate.css";
 import { useNavigate } from 'react-router-dom';
+import ColorPalette from './ColorPalette';
 const Notes = () => {
   const context = useContext(noteContext);
   const { notes, getNotes,editNote } = context;
@@ -24,7 +25,32 @@ const Notes = () => {
   //to access alert state
   const { showAlert } = useContext(alertContext);
 
+  const [paletteActive, setpaletteActive] = useState(false);
+  const pallet={
+      "red":"bg-red-400",
+      "blue":"bg-blue-400",
+      "green":"bg-green-400",
+      "orange":"bg-orange-400",
+      "violet":"bg-violet-400",
+      "yellow":"bg-yellow-400",
+  }
+  const showPalette = () => {
+      console.log("ss")
+      setpaletteActive(!paletteActive);
+  };
+  const setBackground=(color,note)=>{
+    console.log(color,note);
+    setNote({
+         _id:note._id,
+         title:note.title,
+         description:note.description,
+         tag:note.tag,
+         background:color
+         });
+         console.log(color,note);
 
+    editNote(note._id,note.title,note.description,note.tag,color);
+}
 
   //add ref for modal access and call modal button click using a method
   const ref = useRef(null);
@@ -66,19 +92,7 @@ const onChange=(event)=>{
     setNote({...note,[event.target.name]:event.target.value});
     
 }
-const setBackground=(color,note)=>{
-    console.log(color,note);
-    setNote({
-         _id:note._id,
-         title:note.title,
-         description:note.description,
-         tag:note.tag,
-         background:color
-         });
-         console.log(color,note);
 
-    editNote(note._id,note.title,note.description,note.tag,color);
-}
   
   return (
     <>
@@ -89,7 +103,7 @@ const setBackground=(color,note)=>{
       <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">  
-            <div className="container  shadow p-3  bg-white rounded" >
+            <div className="relative container  shadow p-3  bg-white rounded" >
                     <form action=" ">
 
                         <div className="mb-3">
@@ -110,11 +124,12 @@ const setBackground=(color,note)=>{
 
                                 <div className='col-md-1 mx-1'>
                                     <Tooltip title="Background Options">
-                                        <IconButton disableTouchRipple="true" size="small">
+                                        <IconButton disableTouchRipple="true" size="small"  onClick={showPalette}>
                                             <ColorLensOutlinedIcon fontSize='inherit' />
                                         </IconButton>
                                     </Tooltip>
                                 </div>
+                                {paletteActive?<ColorPalette  note={note}  setBackground={setBackground}/>:""}
                                 <div className='col-md-1 mx-1'>
                                     <Tooltip title="Add Image">
                                         <IconButton disableTouchRipple="true" size="small">

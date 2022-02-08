@@ -74,7 +74,7 @@ const NoteItem = (props) => {
         <div className='col-md-3 showhim ' >
             {transition((style, item) => item ?
                 <animated.div style={style}>
-                    <div className={`card xl:mx-4 lg:mx-4 md:mx-3 sm:mx-2 ${note.background==="Default"?pallet["red"]:pallet[note.background]}`} style={{ width: "18rem", margin: "10px" }}>
+                    <div className={`card xl:mx-4 lg:mx-4 md:mx-3 sm:mx-2 ${note.background==="Default"?pallet["white"]:pallet[note.background]}`} style={{ width: "18rem", margin: "10px" }}>
                         <div className="card-body">
                             <div >
                                 <div className='row '>
