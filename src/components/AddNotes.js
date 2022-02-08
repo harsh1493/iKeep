@@ -24,8 +24,8 @@ const AddNotes = () => {
     // const [title,setTitle] = useState();
     // const [description,setDescription] = useState();
     const [note, setNote] = useState({title:"",description:"",tag:""});
-
-
+    const [noteStates,setNoteStates]=useState([]);
+    const [currentState,setCurrentState]=useState(0);
 
     const handleClick = (event) => {
         //prevents reload of page on submit
@@ -42,6 +42,8 @@ const AddNotes = () => {
     const onChange=(event)=>{
         //spread the existing note and add/overwrite the respective target.name to respective target.value
         setNote({...note,[event.target.name]:event.target.value});
+        setNoteStates(noteStates.concat(note));
+        setCurrentState(currentState+1);
     }
 
 
@@ -77,7 +79,20 @@ const AddNotes = () => {
         }, [ref,note]);
     }
 
-
+    //to undo input text to previous state
+    const undo=()=>{
+        console.log(noteStates);
+        setNote(noteStates.at(currentState-1));
+        setCurrentState(currentState-1);
+    }
+    const redo=()=>{
+        if(currentState<noteStates.length-1){
+        setNote(noteStates.at(currentState+1));
+        setCurrentState(currentState+1);
+        }else{
+        console.log(noteStates);}
+        console.log(noteStates.at(currentState),currentState);
+    }
 
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
@@ -148,7 +163,7 @@ const AddNotes = () => {
                                 <div className='col-md-1 mx-1'>
                                     <Tooltip title="Undo">
                                     <div style={{cursor:"no-drop"}}>
-                                            <IconButton disableTouchRipple="true" size="small" disabled={!note.title && !note.description} >
+                                            <IconButton onClick={undo} disableTouchRipple="true" size="small" disabled={!note.title && !note.description} >
                                                 <UndoIcon fontSize='inherit' />
                                             </IconButton>
                                         </div>
@@ -157,7 +172,7 @@ const AddNotes = () => {
                                 <div className='col-md-1 mx-1'>
                                     <Tooltip title="Redo" disabled="false">
                                         <div style={{cursor:"no-drop"}}>
-                                            <IconButton disableTouchRipple="true" size="small" disabled={!note.title && !note.description} >
+                                            <IconButton  onClick={redo} disableTouchRipple="true" size="small" disabled={noteStates.length<=currentState}  >
                                                 <RedoIcon fontSize='inherit' />
                                             </IconButton>
                                         </div>

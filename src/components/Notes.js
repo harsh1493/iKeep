@@ -24,18 +24,6 @@ const Notes = () => {
   //to access alert state
   const { showAlert } = useContext(alertContext);
 
-//to fetch notes at init state
-  useEffect(() => {
-      //if auth toke exists return notes
-      if(localStorage.getItem('token')){
-        getNotes();
-      }else{
-          navigate('/login');
-      }
-
-    // eslint-disable-next-line
-  }, []);
-
 
 
   //add ref for modal access and call modal button click using a method
@@ -46,13 +34,29 @@ const Notes = () => {
   }
 
   //hamdle edit fuctionality
-  const [note, setNote] = useState({id:"",title:"",description:"",tag:""});
+  const [note, setNote] = useState({id:"",title:"",description:"",tag:"",background:""});
+
+
+  //to fetch notes at init state
+  useEffect(() => {
+    //if auth toke exists return notes
+    if(localStorage.getItem('token')){
+      getNotes();
+    }else{
+        navigate('/login');
+    }
+
+  // eslint-disable-next-line
+}, [note]);
+
+
   const handleClick = (event) => {
     //prevents reload of page on submit
      event.preventDefault();
      showAlert("Note updated", "success");
      console.log(note);
-     editNote(note._id,note.title,note.description,note.tag);
+     editNote(note._id,note.title,note.description,note.tag,note.background);
+    
     // note.title && note.description && addNote(note.title,note.description,note.tag);
     // setShow(true);
     // setNote({});
@@ -60,6 +64,20 @@ const Notes = () => {
 const onChange=(event)=>{
     //spread the existing note and add/overwrite the respective target.name to respective target.value
     setNote({...note,[event.target.name]:event.target.value});
+    
+}
+const setBackground=(color,note)=>{
+    console.log(color,note);
+    setNote({
+         _id:note._id,
+         title:note.title,
+         description:note.description,
+         tag:note.tag,
+         background:color
+         });
+         console.log(color,note);
+
+    editNote(note._id,note.title,note.description,note.tag,color);
 }
   
   return (
@@ -157,7 +175,7 @@ const onChange=(event)=>{
       {notes.length===0?<div className="RfDI4d-neVct-Ne3sFf-haAclf QT3Do" ><div className="neVct-Ne3sFf-Bz112c"></div><div className="neVct-Ne3sFf-fmcmS">Notes you add appear here</div></div>:
       <div className="row my-3" >
         {notes.map((note) => {
-          return <NoteItem note={note} key={note._id} updateNote={updateNote} />;
+          return <NoteItem note={note} key={note._id} updateNote={updateNote} setBackground={setBackground}/>;
         })}
       </div>}
     </>

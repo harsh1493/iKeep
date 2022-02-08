@@ -25,7 +25,7 @@ const NoteState = (props) => {
   }
 
   //Add a note
-  const addNote = async (title, description,tag) => {
+  const addNote = async (title, description,tag,background) => {
     console.log("Adding a new note");
     //API call
     const response = await fetch(`${host}/api/notes/addNote`, {
@@ -34,7 +34,7 @@ const NoteState = (props) => {
         'Content-Type': 'application/json',
         'auth-token': localStorage.getItem('token')
       },
-      body: JSON.stringify({title, description,tag})
+      body: JSON.stringify({title, description,tag,background})
     });
 
     const note = await response.json()
@@ -61,7 +61,7 @@ const NoteState = (props) => {
   }
 
   //Edit a note
-  const editNote = async (id, title, description, tag) => {
+  const editNote = async (id, title, description, tag,background) => {
     //API call
     const response = await fetch(`${host}/api/notes/updateNote/${id}`, {
       method: 'PUT',
@@ -69,7 +69,7 @@ const NoteState = (props) => {
         'Content-Type': 'application/json',
         'auth-token': localStorage.getItem('token')
       },
-      body: JSON.stringify({ title, description, tag })
+      body: JSON.stringify({ title, description, tag ,background})
     });
     const json =await response.json();
     console.log("edit note called",json);
@@ -81,6 +81,7 @@ const NoteState = (props) => {
         note.title = title;
         note.description = description;
         note.tag = tag;
+        note.background=background;
       }
 
     }
