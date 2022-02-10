@@ -3,6 +3,7 @@ import { useContext, useEffect, useRef,useState } from 'react/cjs/react.developm
 import NoteItem from './NoteItem';
 import noteContext from '../context/Notes/NoteContext';
 import alertContext from '../context/Alert/AlertContext';
+import navContext from '../context/Navbar/NavContext';
 import AddNotes from './AddNotes';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import UndoIcon from '@mui/icons-material/Undo';
@@ -15,12 +16,18 @@ import { IconButton } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import { Button } from '@mui/material';
 import "../styles/alternate.css";
-import { useNavigate } from 'react-router-dom';
+import {useLocation, useNavigate } from 'react-router-dom';
 import ColorPalette from './ColorPalette';
-const Notes = () => {
+import Reminders from './Reminders';
+const Notes = (props) => {
   const context = useContext(noteContext);
   const { notes, getNotes,editNote } = context;
   const navigate = useNavigate();
+  const location=useLocation();
+  //to access sideNav state
+  const sideNavContext = useContext(navContext);
+  const {isExpanded,setIsExpanded}=sideNavContext;
+
 
   //to access alert state
   const { showAlert } = useContext(alertContext);
@@ -95,8 +102,9 @@ const onChange=(event)=>{
 
   
   return (
-    <>
+    <div className={`flex flex-col  ${isExpanded?"ml-56":""}`}>
       <AddNotes />
+      
       <button  style={{display:"none"}}type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" ref={ref}>
         Launch demo modal
       </button>
@@ -189,11 +197,14 @@ const onChange=(event)=>{
       </div>
       {notes.length===0?<div className="RfDI4d-neVct-Ne3sFf-haAclf QT3Do" ><div className="neVct-Ne3sFf-Bz112c"></div><div className="neVct-Ne3sFf-fmcmS">Notes you add appear here</div></div>:
       <div className="row my-3" >
-        {notes.map((note) => {
-          return <NoteItem note={note} key={note._id} updateNote={updateNote} setBackground={setBackground}/>;
+
+    
+      {props.path==="reminders" && <Reminders notes={notes} key={note._id} updateNote={updateNote} setBackground={setBackground} isExpanded={isExpanded} ></Reminders>}
+        {props.path=="/" && notes.map((note) => {
+          return <NoteItem note={note} key={note._id} updateNote={updateNote} setBackground={setBackground} isExpanded={isExpanded}/>;
         })}
       </div>}
-    </>
+    </div>
   );
 };
 

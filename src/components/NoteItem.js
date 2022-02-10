@@ -20,7 +20,7 @@ const NoteItem = (props) => {
     //context to change state of note
     const context = useContext(noteContext);
     const { deleteNote } = context;
-    const { note, updateNote,setBackground } = props;
+    const { note, updateNote,setBackground,isExpanded } = props;
     const { showAlert } = useContext(alertContext);
     //add fade-away animation on delete note
     const [isVisible, setIsVisible] = useState(true);
@@ -71,7 +71,7 @@ const NoteItem = (props) => {
 
 
     return (
-        <div className='col-md-3 showhim ' >
+        <div className={`${isExpanded?"col-md-4":"col-md-3"} showhim `} >
             {transition((style, item) => item ?
                 <animated.div style={style}>
                     <div className={`card xl:mx-4 lg:mx-4 md:mx-3 sm:mx-2 ${note.background==="Default"?pallet["white"]:pallet[note.background]}`} style={{ width: "18rem", margin: "10px" }}>
