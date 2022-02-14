@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-import About from './components/About';
 import Auth from './components/Auth';
 import SideNav from './components/SideNav';
 import NoteState from './context/Notes/NoteState';
@@ -14,8 +13,6 @@ import Alert from './components/Alert';
 import AlertState from './context/Alert/AlertState';
 import AuthState from './context/Auth/AuthState';
 import NavState from './context/Navbar/NavState';
-import Reminders from "./components/Reminders";
-import Notes from './components/Notes';
 import Archive from './components/Archive';
 import Bin from './components/Bin';
 function App() {

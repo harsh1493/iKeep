@@ -7,9 +7,9 @@ const Alert = () => {
 
 
   return (
-    alert && <div className={`alert alert-${alert.type} alert-dismissible fade show`} role="alert">
+    alert ? <div className={`alert alert-${alert.type} alert-dismissible fade show pb-4`} role="alert">
     {alert.msg}
-</div>
+</div>:<div className='h-20'></div>
   );
 };
 

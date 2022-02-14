@@ -205,7 +205,7 @@ const onChange=(event)=>{
         })}
       </div>}
     </div>
-  );
+  );  
 };
 
 export default Notes;
