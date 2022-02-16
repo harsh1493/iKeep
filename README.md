@@ -1,4 +1,4 @@
-# ![Logo](./documents/logo.png) A Clone of Google Keep
+# ![Logo](./documents/keep.png) A Clone of Google Keep
 
 A minimal *Clone* of [Google Keep](https://keep.google.com) written in [ReactJS](https://reactjs.org/) with [Material UI Components](https://material-ui.com/), themed to look exactly like *Google Keep*, with complex features like sharing, archiving, reminders etc. shoved away. The backend is a [Node.js](https://nodejs.org/en/) server written in [Express.js](https://expressjs.com/), with data persisted in [Mongodb](https://www.mongodb.com/). The server implementation is complete with *Jason Web Token  based Authentication*, implemented using [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken).
 
