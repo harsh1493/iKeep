@@ -37,6 +37,15 @@ A minimal *Clone* of [Google Keep](https://keep.google.com) written in [ReactJS]
 <br/>*Edit notes demo*
 
 </div>
+
+<div align="center">
+
+![side nav demo](./documents/sideNav.gif)
+<br/>*side nav demo*
+
+</div>
+
+
 ## Features
 
 * 🔐 **Login** & 🔏 **Register** for creating a new user
