@@ -149,7 +149,7 @@ const NoteItem = (props) => {
                             </div>
                             <div className='col-md-2'>
                                 <Tooltip title="Edit">
-                                    <IconButton disableTouchRipple="true" size="small" onClick={() => { updateNote(note);focusNote() }} >
+                                    <IconButton disableTouchRipple="true" size="small" onClick={() => { updateNote(note) }} >
                                         <EditIcon fontSize='inherit' />
                                     </IconButton>
                                 </Tooltip>
