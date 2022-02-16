@@ -1,12 +1,11 @@
 # ![Logo](./docs/logo.ico) A Clone of Google Keep
 
-A minimal *Clone* of [Google Keep](https://keep.google.com) written in [ReactJS](https://reactjs.org/) with [Material UI Components](https://material-ui.com/), themed to look exactly like *Google Keep*, with complex features like sharing, archiving, reminders etc. shoved away. The backend is a [GraphQL](https://graphql.org/) server written in [Golang](https://golang.org/), with data persisted in [SQLite](https://sqlite.org) DB file, via [GORM](https://gorm.io). The server implementation is complete with *Cookie based Authentication*, implemented using [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken).
+A minimal *Clone* of [Google Keep](https://keep.google.com) written in [ReactJS](https://reactjs.org/) with [Material UI Components](https://material-ui.com/), themed to look exactly like *Google Keep*, with complex features like sharing, archiving, reminders etc. shoved away. The backend is a [Node.js](https://nodejs.org/en/) server written in [Express.js](https://expressjs.com/), with data persisted in [Mongodb](https://www.mongodb.com/). The server implementation is complete with *Jason Web Token  based Authentication*, implemented using [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken).
 
-![Docker Image CI](https://github.com/anselm94/googlekeepclone/workflows/Docker%20Image%20CI/badge.svg)
 
 <div align="center">
 
-![Light and Dark theme demo](./docs/dark-light-theme.gif)
+![Light and Dark theme demo](./document/darkmode.gif)
 <br/>*Light and Dark theme*
 
 </div>
