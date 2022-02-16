@@ -7,9 +7,20 @@ import { IconButton } from '@mui/material';
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import { useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../state/index';
+import { useDispatch } from 'react-redux';
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  //to handle state of dark mode using redux
+  const mode =useSelector(state=>state.mode);
+  const dispatch = useDispatch();
+  const actions = bindActionCreators(actionCreators, dispatch);
+  const {changeMode } = actions;
 
   useEffect(() => {
     console.log(location.pathname);
@@ -30,7 +41,7 @@ const Navbar = () => {
 
 
 
-  return <div><nav className="navbar navbar-expand-lg navbar-light bg-light ">
+  return <div><nav className={`navbar navbar-expand-lg navbar-${mode} bg-${mode}`}>
     <div className="container-fluid">
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
@@ -40,7 +51,7 @@ const Navbar = () => {
           <li className="px-3">
             <Tooltip title="Main menu">
               <IconButton onClick={toggleNav} disableTouchRipple="true" size="large" aria-haspopup="true" aria-expanded="false" >
-                <DensityMediumIcon fontSize='inherit' />
+                <DensityMediumIcon fontSize='inherit' className={`${mode==="dark"?"text-white":""}`}/>
               </IconButton>
             </Tooltip>
           </li>
@@ -48,7 +59,7 @@ const Navbar = () => {
             <Link className="navbar-brand " to="/" >
               <img className="gb_sc gb_Zd" src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png" srcSet="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png 1x, https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png 2x "
                 alt="" aria-hidden="true" style={{ width: "40px", height: "40px" }} /></Link>
-            <h2 className='text-2xl font-semibold pt-2 text-slate-700'>IKeep</h2>
+            <h2 className={`text-2xl font-semibold pt-2 before:${mode==="dark"?"text-white":"text-black"}`}>IKeep</h2>
           </li>
         </ul>
         <form className="flex me-auto bg-white px-2  items-center ml-10 shadow-md rounded-md">
@@ -70,7 +81,13 @@ const Navbar = () => {
             </Tooltip>
           </div>
         </form>
-
+        <div className='px-4'>
+        <Tooltip title="Dark mode">
+              <IconButton disableTouchRipple="true" size="large" aria-haspopup="true" aria-expanded="false" onClick={() => {changeMode(mode);console.log(mode)}} >
+                {mode==="dark"?<Brightness4Icon fontSize='inherit'className={`${mode==="dark"?"text-white":""}`} />:<Brightness7Icon fontSize='inherit'/>}
+              </IconButton>
+        </Tooltip>
+        </div>
         {!localStorage.getItem('token') ? <form className="d-flex" style={{ visibility: location.pathname === '/' || location.pathname === '/about' ? "visible" : "hidden" }} >
           <Button variant='contained' className='mx-3'><Link style={{ textDecoration: "none", color: "white" }} to="/login">Login</Link></Button>
           <Button variant='contained'><Link to="/signup" style={{ textDecoration: "none", color: "white" }}>Signup</Link></Button>

@@ -137,9 +137,9 @@ const AddNotes = () => {
     return (
         <div className='container '>
             <div className='flex justify-content-center' style={{ width: "100%" }}>
-                {show ? <div className="shadow p-3 mb-5 bg-white rounded w-50 my-3 " onClick={handleFlick} >
-                    <p>Take a note...</p>
-                </div> : <div className={`relative container my-3 shadow-2xl  p-3 mb-5 rounded w-50 ${note.background === "Default" ? pallet["white"] : pallet[note.background]}`} ref={wrapperRef}>
+                {show ? <div className="shadow p-3 mb-5 bg-white rounded w-50 my-3 text-slate-900" onClick={handleFlick} >
+                    <p >Take a note...</p>
+                </div> : <div className={`bg-white relative container my-3 shadow-2xl  p-3 mb-5 rounded w-50 ${note.background === "Default" ? pallet["white"] : pallet[note.background]}`} ref={wrapperRef}>
                     <form action=" " className='w-4/5'>
 
                         <div className="mb-3 bg-transparent">
@@ -201,8 +201,8 @@ const AddNotes = () => {
                             </Tooltip>
 
 
-                            <div className=' absolute right-0'>
-                                <Button disabled={!(note.title && note.description && note.title.length > 5 && note.description.length > 5)} type='submit' variant="text" color="inherit" size='small' onClick={handleClick}>Close</Button>
+                            <div className='text-black absolute right-0 pr-5 hover:bg-black hover:text-white' >
+                                <Button  disabled={!(note.title && note.description && note.title.length > 5 && note.description.length > 5)} type='submit' variant="text" color="inherit" size='small' onClick={handleClick}>Close</Button>
                             </div>
 
                         </div>

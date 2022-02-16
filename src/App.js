@@ -15,8 +15,12 @@ import AuthState from './context/Auth/AuthState';
 import NavState from './context/Navbar/NavState';
 import Archive from './components/Archive';
 import Bin from './components/Bin';
+import { useSelector } from 'react-redux';
+
 function App() {
+  const mode =useSelector(state=>state.mode);
   return (
+    <div className={`${mode==="dark"?"bg-slate-900 text-white":""}`} style={{height:"100vh"}}>    
     <AuthState>
       <AlertState>
         <NoteState>
@@ -25,8 +29,7 @@ function App() {
               <Navbar />
               <Alert />
               <SideNav />
-              <div className="container">
-
+              <div className="container" >
                 <Routes>
                   <Route path="/" element={<Home path="/"/>} />
                   {/* <Route path="/about" element={<About />} /> */}
@@ -42,6 +45,9 @@ function App() {
         </NoteState>
       </AlertState>
     </AuthState>
+    </div>
+
+   
   );
 }
 
