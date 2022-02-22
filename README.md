@@ -87,7 +87,6 @@ The DB is a *MongoDB*, *mongoose* allows quick and easy Database modelling.
 
 ## How to Setup and Run
 
-### Method 1: Docker
 
 1) Clone the Git repository
 
